@@ -2,24 +2,26 @@ import React, { useState, useEffect} from 'react'
 import '../styles/Chat.css'
 import queryString from 'query-string'
 import io from 'socket.io-client'
-import ScrollToBottom from 'react-scroll-to-bottom'
-
+import Input from '../components/Input'
+import ChatBox from '../components/ChatBox'
+import RoomUsers from '../components/RoomUsers'
 let socket;
 export default function Chat({ location }) {
     const [name, setName] = useState('')
     const [room, setRoom] = useState('')
     const [message, setMessage] = useState('')
     const [messages, setMessages] = useState([])
+    const [roomData, setRoomData] = useState({})
+    const [isLoading, setIsLoading] = useState(true)
     const BASE_URL = 'https://live-chat-backend-hayder.herokuapp.com'
+    // const BASE_URL = 'http://localhost:5000'
     useEffect(() => {
         const {name, room} = queryString.parse(location.search)
         socket = io(BASE_URL)
         setName(name)
         setRoom(room)
         socket.emit('join', {name, room}, () => {
-            
         })
-
         return () => {
             socket.emit('disconnect')
             socket.off()
@@ -33,6 +35,8 @@ export default function Chat({ location }) {
             setMessages([...messages, message])
         })
     },[messages])
+
+
     const sendMessage = e => {
         e.preventDefault()
         if(message){
@@ -42,24 +46,23 @@ export default function Chat({ location }) {
              
         }
     }
-    console.log(message, messages);
+
     return (
-        <div>
-            {/* <div className='chat-display-wrapper'> */}
-                <ScrollToBottom>
-                {messages.map(m => {
-                    return(
-                        <div>
-                            <p>{m.user}:</p><span>{m.text}</span>
-                        </div>
-                    )
-                })}
-                </ScrollToBottom>
-            {/* </div> */}
-            <input type='text' value={message} onChange={e => setMessage(e.target.value)}
-                                onKeyPress={e => e.key === 'Enter' ? sendMessage(e) : null}
-            />
-            <button onClick={(e) => sendMessage(e)}>Send</button>
+        <div className="chat-wrapper">
+            <div className="chat-body">
+            <div className='chat-left'>
+                {/* <RoomUsers roomData={roomData} />   */}
+            </div>
+            <div className='chat-right'>
+            <a className='exit' href='/'>exit</a>
+                <div className='chat-top'>
+                    <ChatBox messages={messages} name={name}/>
+                </div>
+                <div className='chat-botton'>
+                    <Input message={message} setMessage={setMessage} sendMessage={sendMessage} />
+                </div>
+            </div>
+            </div>
         </div>
     )
 }

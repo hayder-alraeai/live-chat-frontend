@@ -43,4 +43,37 @@
     font-size: 30px;
     color: white;
     font-weight:bolder;
+    border: none;
+    margin-top: 10px;
+}
+@media (max-width : 600px){
+    .join-body{
+        width: 90%;
+        padding:10px;
+    }
+    .join-title{
+        font-size: 30px;
+        font-weight:bolder;
+        color: #f74d40;
+        margin-bottom: 30px;
+    }
+    .join-body input{
+        width: 90%;
+        padding: 20px;
+        margin-bottom: 10px;
+        border-radius: 10px;
+        outline: none;
+        font-size: 20px;
+        border: 1px solid #f74d40;
+    }
+    .join-body a{
+        width:100%;
+    }
+    .join-body button{
+        width:100%;
+        padding: 20px;
+        font-size: 20px;
+        border: none;
+        margin-top: 10px;
+    }
 }

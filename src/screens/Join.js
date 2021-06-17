@@ -11,7 +11,7 @@ export default function Join() {
                 <div className='join-title'>Alraeai Live chat</div>
                 <input type='text' placeholder='Name' onChange={e => setName(e.target.value)} />
                 <input type='text' placeholder='Room' onChange={e => setRoom(e.target.value)} />
-                <Link to={`/chat?name=${name}&room=${room}`} onClick={e => (!name || !room) ? e.preventDefault() : null} >
+                <Link to={`/chat?name=${name}&room=${room}`}  onClick={e => (!name || !room) ? e.preventDefault() : null} >
                     <button type='submit'>Join</button>
                 </Link>
             </div>
