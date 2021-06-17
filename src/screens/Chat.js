@@ -10,7 +10,7 @@ export default function Chat({ location }) {
     const [room, setRoom] = useState('')
     const [message, setMessage] = useState('')
     const [messages, setMessages] = useState([])
-    const BASE_URL = 'http://localhost:5000'
+    const BASE_URL = 'https://live-chat-backend-hayder.herokuapp.com'
     useEffect(() => {
         const {name, room} = queryString.parse(location.search)
         socket = io(BASE_URL)
