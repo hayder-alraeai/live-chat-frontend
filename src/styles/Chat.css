@@ -1,0 +1,7 @@
+.chat-display-wrapper{
+    height: 300px;
+    background-color: #eee;
+    overflow: scroll;
+    width: 100%;
+    padding: 10px;
+}
